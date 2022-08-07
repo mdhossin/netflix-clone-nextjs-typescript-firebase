@@ -55,7 +55,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
         setInitialLoading(false);
       }),
-    [router]
+    [auth]
   );
 
   const signUp = async (email: string, password: string) => {
@@ -89,6 +89,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     signOut(auth)
       .then(() => {
         setUser(null);
+        setLoading(false);
       })
       .catch((error) => alert(error.message))
       .finally(() => setLoading(false));

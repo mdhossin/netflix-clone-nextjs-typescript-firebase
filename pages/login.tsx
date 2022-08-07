@@ -1,7 +1,7 @@
 import Head from "next/head";
 import Image from "next/image";
 import { useState } from "react";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { useForm, SubmitHandler } from "react-hook-form";
 import useAuth from "../hooks/useAuth";
 
 interface Inputs {
@@ -9,13 +9,15 @@ interface Inputs {
   password: string;
 }
 
-const login = () => {
+function Login() {
   const [login, setLogin] = useState(false);
   const { signIn, signUp, loading } = useAuth();
+  console.log(loading);
+
   const {
     register,
     handleSubmit,
-
+    watch,
     formState: { errors },
   } = useForm<Inputs>();
 
@@ -27,6 +29,7 @@ const login = () => {
       await signUp(data.email, data.password);
     }
   };
+
   return (
     <div className="relative flex h-screen w-screen flex-col bg-black md:items-center md:justify-center md:bg-transparent">
       <Head>
@@ -41,10 +44,9 @@ const login = () => {
         alt=""
       />
 
-      <div className="absolute left-4 top-4 cursor-pointer object-contain md:left-10 md:top-6">
+      <div className="absolute left-4 top-4 ">
         <Image
-          //   className="cursor-pointer object-contain"
-
+          className="cursor-pointer object-contain md:left-10 md:top-6"
           width={100}
           height={30}
           src="/netflix-logo.svg"
@@ -94,7 +96,7 @@ const login = () => {
           onClick={() => setLogin(true)}
           type="submit"
         >
-          {loading ? "Loading..." : " Sign In"}
+          {loading ? "Loading..." : "Sign In"}
         </button>
         <div className="text-[gray]">
           New to Netflix?{" "}
@@ -109,6 +111,6 @@ const login = () => {
       </form>
     </div>
   );
-};
+}
 
-export default login;
+export default Login;

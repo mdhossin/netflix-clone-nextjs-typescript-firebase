@@ -1,8 +1,10 @@
 import Head from "next/head";
-import { Banner, Header, Row } from "../components";
+import { useRecoilState } from "recoil";
+import { Banner, Header, Modal, Row } from "../components";
 import useAuth from "../hooks/useAuth";
 import { Movie } from "../typings";
 import requests from "../utils/requests";
+import { modalState } from "../atoms/modalAtom";
 
 interface Props {
   netflixOriginals: Movie[];
@@ -25,8 +27,11 @@ const Home = ({
   topRated,
   trendingNow,
 }: Props) => {
-  const { user } = useAuth();
-  console.log(user, "user");
+  const { user, loading } = useAuth();
+  const [showModal, setShowModal] = useRecoilState(modalState);
+  console.log(showModal, "mdoa");
+
+  if (loading) return null;
   return (
     <div className="relative h-screen bg-gradient-to-b from-gray-900/10 to-[#100511] lg:h-[140vh]">
       <Head>
@@ -54,6 +59,8 @@ const Home = ({
       </main>
 
       {/* modal */}
+
+      {showModal && <Modal />}
     </div>
   );
 };
