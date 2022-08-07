@@ -11,19 +11,8 @@ import {
   VolumeUpIcon,
   XIcon,
 } from "@heroicons/react/outline";
-import { Element, Genre, Movie } from "../typings";
+import { Element, Genre } from "../typings";
 import MuiModal from "@mui/material/Modal";
-import {
-  collection,
-  deleteDoc,
-  doc,
-  DocumentData,
-  onSnapshot,
-  setDoc,
-} from "firebase/firestore";
-import { db } from "../firebase";
-import useAuth from "../hooks/useAuth";
-import toast, { Toaster } from "react-hot-toast";
 
 function Modal() {
   const [movie, setMovie] = useRecoilState(movieState);
@@ -32,18 +21,6 @@ function Modal() {
   const [muted, setMuted] = useState(true);
   const [genres, setGenres] = useState<Genre[]>([]);
   const [addedToList, setAddedToList] = useState(false);
-  const { user } = useAuth();
-  const [movies, setMovies] = useState<DocumentData[] | Movie[]>([]);
-
-  const toastStyle = {
-    background: "white",
-    color: "black",
-    fontWeight: "bold",
-    fontSize: "16px",
-    padding: "15px",
-    borderRadius: "9999px",
-    maxWidth: "1000px",
-  };
 
   useEffect(() => {
     if (!movie) return;
@@ -73,10 +50,7 @@ function Modal() {
   const handleClose = () => {
     setShowModal(false);
     setMovie(null);
-    toast.dismiss();
   };
-
-  console.log(addedToList);
 
   return (
     <MuiModal
@@ -85,7 +59,6 @@ function Modal() {
       className="fixed !top-7 left-0 right-0 z-50 mx-auto w-full max-w-5xl overflow-hidden overflow-y-scroll rounded-md scrollbar-hide"
     >
       <>
-        <Toaster position="bottom-center" />
         <button
           className="modalButton absolute right-5 top-5 !z-40 h-9 w-9 border-none bg-[#181818] hover:bg-[#181818]"
           onClick={handleClose}

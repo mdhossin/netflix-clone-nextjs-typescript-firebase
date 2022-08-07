@@ -27,9 +27,8 @@ const Home = ({
   topRated,
   trendingNow,
 }: Props) => {
-  const { user, loading } = useAuth();
+  const { loading } = useAuth();
   const [showModal, setShowModal] = useRecoilState(modalState);
-  console.log(showModal, "mdoa");
 
   if (loading) return null;
   return (
