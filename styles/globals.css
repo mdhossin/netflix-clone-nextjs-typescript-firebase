@@ -5,12 +5,7 @@
 /* base mean all html tags like body , h1 etc */
 @layer base {
   body {
-    @apply bg-[#141414] text-white;
-  }
-
-  ::-webkit-scrollbar {
-    width: 4px;
-    color: red;
+    @apply bg-[#141414] text-white  !scrollbar-thin !scrollbar-track-transparent !scrollbar-thumb-red-600;
   }
 
   header {
