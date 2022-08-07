@@ -1,5 +1,6 @@
 import Head from "next/head";
 import { Banner, Header, Row } from "../components";
+import useAuth from "../hooks/useAuth";
 import { Movie } from "../typings";
 import requests from "../utils/requests";
 
@@ -24,6 +25,8 @@ const Home = ({
   topRated,
   trendingNow,
 }: Props) => {
+  const { user } = useAuth();
+  console.log(user, "user");
   return (
     <div className="relative h-screen bg-gradient-to-b from-gray-900/10 to-[#100511] lg:h-[140vh]">
       <Head>
