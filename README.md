@@ -3,4 +3,5 @@
 - Implement firebase authentication
 - User after login can see the home page and see the video trailer with modal popup
 - Responsive for all devices
+- Using tmdb api 
 - Here is the live link - (https://netflix-clone-nextjs-typescript-firebase.vercel.app/)
